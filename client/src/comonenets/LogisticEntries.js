@@ -24,16 +24,14 @@ function LogisticEntries({ data }) {
           return (
             <Tr>
               <Tr>
-                <Button>
-                  <EditIcon
-                    onClick={() =>
+                <Button onClick={() =>
                       handleClick(
                         entry._id,
                         entry.customerName,
                         entry.orderNumber
                       )
-                    }
-                  />
+                    }leftIcon={<EditIcon/>}>
+                    Edit
                 </Button>
               </Tr>
               <Td>{entry.customerName}</Td>

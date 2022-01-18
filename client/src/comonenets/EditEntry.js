@@ -10,16 +10,40 @@ export default function EditEntry() {
 
   const nameRef = useRef("");
   const orderNumberRef = useRef();
+  
+  console.log("NOT IN UPDATE",nameRef,orderNumberRef);
+
 
   function handleDelete() {
     axios
       .delete(`http://localhost:3000/delete/${id}`)
       .then((res) => {
-        if (res.data == "Success") {
+        if (res.data === "Success") {
           navigate("/");
         }
       })
       .catch((e) => setError("An error occured"));
+  }
+
+  function handleUpdate(){
+    //check for namerefs and stuff to see if they're equal or not
+    const nameToUpdate = nameRef.current.value !== "" ? nameRef.current.value : name;
+    const orderNumberToUpdate = orderNumberRef.current.value ? orderNumberRef.current.value : order;
+    axios
+    .put("http://localhost:3000/update",{
+      id:id,
+      customerName:nameToUpdate,
+      orderNumber:orderNumberToUpdate
+    })
+    .then((res) => {
+      if (res.data === "Success") {
+        navigate("/");
+      }else{
+        setError(res.data);
+      }
+      
+    })
+    .catch((e) => setError(JSON.stringify(e)));
   }
   return (
     <div>
@@ -31,7 +55,7 @@ export default function EditEntry() {
         marginTop="50px"
       >
         {error}
-        <form id="logistics-form-update">
+      <form id="logistics-form-update">
           <FormControl w="md" bg="blue.200" borderRadius="10px" padding="25px">
             <FormLabel htmlFor="name"> Customer name</FormLabel>
             <Input
@@ -49,7 +73,7 @@ export default function EditEntry() {
               ref={orderNumberRef}
               placeholder={order}
             />
-            <Button mt={4} colorScheme="teal" type="submit">
+            <Button mt={4} colorScheme="teal" onClick={handleUpdate}>
               Update
             </Button>
             <Button mt={4} colorScheme="red" onClick={handleDelete}>
