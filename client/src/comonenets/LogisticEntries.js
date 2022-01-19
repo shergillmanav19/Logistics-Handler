@@ -24,22 +24,18 @@ function LogisticEntries({ data }) {
           {data.map((entry, i) => {
             return (
               <Tr>
-                <Tr>
-                  <Button>
-                    <EditIcon
-                      onClick={() =>
-                        handleClick(
-                          entry._id,
-                          entry.customerName,
-                          entry.orderNumber
-                        )
-                      }
-                    />
-                  </Button>
-                </Tr>
-                <Td>{entry.customerName}</Td>
-                <Td>{entry.orderNumber}</Td>
-                <Td>{entry.orderDescription}</Td>
+                <Button
+                  onClick={() =>
+                    handleClick(
+                      entry._id,
+                      entry.customerName,
+                      entry.orderNumber
+                    )
+                  }
+                  leftIcon={<EditIcon />}
+                >
+                  Edit
+                </Button>
               </Tr>
             );
           })}
