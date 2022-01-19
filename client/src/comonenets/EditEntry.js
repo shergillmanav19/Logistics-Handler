@@ -1,7 +1,7 @@
 import { Button, Flex, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useRef, useState } from "react";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function EditEntry() {
   const { id, name, order } = useParams();

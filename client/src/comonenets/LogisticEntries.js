@@ -1,4 +1,4 @@
-import { Table, Th, Thead, Td, Tbody, Tr, Button } from "@chakra-ui/react";
+import { Table, Th, Thead, Td, Tbody, Tr, Button, Box } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { EditIcon, CloseIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
@@ -10,40 +10,42 @@ function LogisticEntries({ data }) {
     navigate(`/edit/${_id}/${customerName}/${orderNumber}`);
   }
   return (
-    <Table variant="simple">
-      <Thead>
-        <Tr>
-          <Tr></Tr>
-          <Th>Customer Name</Th>
-          <Th>Order Number</Th>
-          <Th>Order Description</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {data.map((entry, i) => {
-          return (
-            <Tr>
+    <Box w="100%" overflow="hidden">
+      <Table variant="simple">
+        <Thead>
+          <Tr>
+            <Tr></Tr>
+            <Th>Customer Name</Th>
+            <Th>Order Number</Th>
+            <Th>Order Description</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {data.map((entry, i) => {
+            return (
               <Tr>
-                <Button>
-                  <EditIcon
-                    onClick={() =>
-                      handleClick(
-                        entry._id,
-                        entry.customerName,
-                        entry.orderNumber
-                      )
-                    }
-                  />
-                </Button>
+                <Tr>
+                  <Button>
+                    <EditIcon
+                      onClick={() =>
+                        handleClick(
+                          entry._id,
+                          entry.customerName,
+                          entry.orderNumber
+                        )
+                      }
+                    />
+                  </Button>
+                </Tr>
+                <Td>{entry.customerName}</Td>
+                <Td>{entry.orderNumber}</Td>
+                <Td>{entry.orderDescription}</Td>
               </Tr>
-              <Td>{entry.customerName}</Td>
-              <Td>{entry.orderNumber}</Td>
-              <Td>{entry.orderDescription}</Td>
-            </Tr>
-          );
-        })}
-      </Tbody>
-    </Table>
+            );
+          })}
+        </Tbody>
+      </Table>
+    </Box>
   );
 }
 
