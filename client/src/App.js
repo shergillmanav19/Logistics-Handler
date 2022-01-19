@@ -9,7 +9,10 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Dashboard />} />
           <Route path="/form" element={<Form />} />
-          <Route path="/edit/:id/:name/:order" element={<EditEntry />} />
+          <Route
+            path="/edit/:id/:customerName/:orderNumber/:orderDescription"
+            element={<EditEntry />}
+          />
         </Routes>
       </Router>
     </div>

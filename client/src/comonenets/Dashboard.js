@@ -10,7 +10,7 @@ function Dashboard() {
   useEffect(() => {
     const request = () =>
       axios
-        .get("http://localhost:3000/orders")
+        .get(`${process.env.REACT_APP_BACKEND_URL}/orders`)
         .then((res) => setData(res.data))
         .catch((err) => setError(err));
 

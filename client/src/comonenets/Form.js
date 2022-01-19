@@ -24,12 +24,9 @@ export default function Form() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(nameRef.current.value);
-    console.log(orderNumberRef.current.value);
-    console.log(descriptionRef.current.value);
     setLoading(true);
     axios
-      .post("http://localhost:3000/create-order", {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/create-order`, {
         customerName: nameRef.current.value,
         orderNumber: orderNumberRef.current.value,
         orderDescription: descriptionRef.current.value,
@@ -68,7 +65,12 @@ export default function Form() {
             ref={orderNumberRef}
           />
           <FormLabel htmlFor="description">Order description</FormLabel>
-          <Textarea id="description" type="description" ref={descriptionRef} />
+          <Textarea
+            id="description"
+            type="description"
+            ref={descriptionRef}
+            maxLength="200"
+          />
           <FormHelperText>We'll never share your information.</FormHelperText>
           <Button mt={4} colorScheme="teal" isLoading={isLoading} type="submit">
             Submit

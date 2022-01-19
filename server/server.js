@@ -46,7 +46,6 @@ app.get("/orders", (req, res) => {
 
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
-  console.log(id);
 
   try {
     await logisticsModel.findByIdAndRemove(id).exec();
@@ -56,30 +55,32 @@ app.delete("/delete/:id", async (req, res) => {
   }
 });
 
-app.put("/update",  (req, res) => {
-  console.log("in update");
+app.put("/update", (req, res) => {
   const id = req.body.id;
   const customerName = req.body.customerName;
   const orderNumber = req.body.orderNumber;
+  const orderDescription = req.body.orderDescription;
 
-  console.log(customerName);
-  console.log(orderNumber);
   try {
-    logisticsModel.findByIdAndUpdate(id, { customerName: customerName, orderNumber: orderNumber, orderDescription: "Hello" },
-    function (err, entry) {
-    if (err){
-      console.log(err)
-      res.send("An error occured. Order number already exists or database is having issues")
-    }
-    else{
-        console.log("Updated entry : ", entry);
-        res.send("Success")
-    }
-});
-
+    logisticsModel.findByIdAndUpdate(
+      id,
+      {
+        customerName: customerName,
+        orderNumber: orderNumber,
+        orderDescription: orderDescription,
+      },
+      function (err, entry) {
+        if (err) {
+          res.send(
+            "An error occured. Order number already exists or database is having issues"
+          );
+        } else {
+          res.send("Success");
+        }
+      }
+    );
   } catch (e) {
-    console.log(e);
-    res.send("Error")
+    res.send("Error");
   }
 });
 
